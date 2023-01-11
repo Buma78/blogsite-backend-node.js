@@ -1,6 +1,6 @@
 const validator = require("validator");
 
-function cleanUpAndValidate(email,username,password)
+function cleanUpAndValidate(username,email,password,name,phonenumber)
   {
     return new Promise((resolve,reject)=>{
         if(typeof email !== "string"){
