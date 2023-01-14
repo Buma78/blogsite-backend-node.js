@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 8000;
 
 const db = require("./Db");
 const Authrouter = require("./Controllers/Auth");
+const Blogrouter = require("./Controllers/Blogs");
+const isAuth = require("./Middlewares/isAuth");
+const Followrouter = require("./Controllers/Follow");
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -31,7 +34,11 @@ app.get('/',(req,res)=>{
     res.send("welcome to blogg app");
 })
 
-app.use("/auth",Authrouter);
+app.use("/auth", Authrouter);
+
+app.use("/blog",isAuth, Blogrouter);
+
+app.use("/follow",isAuth, Followrouter);
 
 app.listen(PORT,()=>{
     console.log(clc.red("App is running on"));
